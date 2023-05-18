@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import coffeeStoreData from "../../data/coffee-stores.json"
 
@@ -13,6 +14,14 @@ export function getStaticProps({ params }) {
 }
 
 export function getStaticPaths() {
+    const paths = coffeeStoreData.map(coffeeStore => {
+        return {
+            params: {
+                id: coffeeStore.id.toString(),
+            }
+        }
+    })
+
     return {
         paths: [
             { params: { id: '0' } },
@@ -24,6 +33,7 @@ export function getStaticPaths() {
 
 const CoffeeStore = (props) => {
     const router = useRouter();
+    const { address, name, neighbourhood } = props.coffeeStore;
 
     // Does route exist in getStaticPaths ? if No then show loading state
     if (router.isFallback) {
@@ -33,10 +43,13 @@ const CoffeeStore = (props) => {
 
     return (
         <>
-            <div>Coffee Store Page {router.query.id}</div>
+            <Head>
+                <title>{name}</title>
+            </Head>
             <Link href="/">Back to Home</Link>
-            <p>{props.coffeeStore.address}</p>
-            <p>{props.coffeeStore.name}</p>
+            <p>{address}</p>
+            <p>{name}</p>
+            <p>{neighbourhood}</p>
         </>
     )
 }
