@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import Head from "next/head";
+import styles from "./coffee-store.module.css"
 import { useRouter } from "next/router";
 import coffeeStoreData from "../../data/coffee-stores.json"
 
@@ -33,24 +35,32 @@ export function getStaticPaths() {
 
 const CoffeeStore = (props) => {
     const router = useRouter();
-    const { address, name, neighbourhood } = props.coffeeStore;
+    const { address, name, neighbourhood, imgUrl } = props.coffeeStore;
 
     // Does route exist in getStaticPaths ? if No then show loading state
     if (router.isFallback) {
         return <div>Loading</div>
-
     }
 
     return (
-        <>
+        <div className={styles.layout}>
             <Head>
                 <title>{name}</title>
             </Head>
-            <Link href="/">Back to Home</Link>
-            <p>{address}</p>
-            <p>{name}</p>
-            <p>{neighbourhood}</p>
-        </>
+            <div className={styles.col1}>
+                <div className={styles.backToHomeLink}>
+                    <Link href="/">Back to Home</Link>
+                </div>
+                <div className={styles.nameWrapper}>
+                    <h1 className={styles.name}>{name}</h1>
+                </div>
+                <Image src={imgUrl} width={600} height={360} className={styles.storeImg} alt={name}></Image>
+            </div>
+            <div className={styles.col2}>
+                <p>{address}</p>
+                <p>{neighbourhood}</p>
+            </div>
+        </div>
     )
 }
 
