@@ -4,6 +4,7 @@ import Banner from "@/components/banner"
 import Card from "@/components/card"
 import Image from "next/image"
 import coffeeStores from "../data/coffee-stores.json"
+import CoffeeStore from "./coffee-store/[id]"
 
 export default function Home() {
 
@@ -24,9 +25,9 @@ export default function Home() {
         <div className={styles.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} />
           <div className={styles.cardLayout}>
-            {coffeeStores.map(coffeeStores => {
+            {coffeeStores.map(coffeeStore => {
               return (
-                <Card name={coffeeStores.name} imgUrl='/static/hero-image.png' href="/coffee-store/darkhorse-coffee" className={styles.card} />
+                <Card name={coffeeStore.name} imgUrl={coffeeStore.imgUrl} href={`/coffee-store/${coffeeStore.id}`} className={styles.card} />
               )
             })}
           </div>
