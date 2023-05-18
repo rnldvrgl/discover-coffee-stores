@@ -5,8 +5,8 @@ import coffeeStoreData from "../../data/coffee-stores.json"
 export function getStaticProps({ params }) {
     return {
         props: {
-            coffeeStore: coffeeStoreData.find(coffeeStore => {
-                return coffeeStore.id === 0;//dynamic id
+            coffeeStore: coffeeStoreData.find((coffeeStore) => {
+                return coffeeStore.id.toString() === params.id; //dynamic id
             }),
         },
     };
@@ -18,15 +18,18 @@ export function getStaticPaths() {
             { params: { id: '0' } },
             { params: { id: '1' } },
         ],
+        fallback: false, //false = to show an error 404 page, true = if we want to stay in the page (if page is not found)
     }
 }
 
-const CoffeeStore = () => {
+const CoffeeStore = (props) => {
     const router = useRouter();
     return (
         <>
-            <div>Coffee Store Page</div>
+            <div>Coffee Store Page {router.query.id}</div>
             <Link href="/">Back to Home</Link>
+            <p>{props.coffeeStore.address}</p>
+            <p>{props.coffeeStore.name}</p>
         </>
     )
 }
