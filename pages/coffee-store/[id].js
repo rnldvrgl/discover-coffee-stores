@@ -18,12 +18,19 @@ export function getStaticPaths() {
             { params: { id: '0' } },
             { params: { id: '1' } },
         ],
-        fallback: false, //false = to show an error 404 page, true = if we want to stay in the page (if page is not found)
+        fallback: true, //false = to show an error 404 page, true = if we want to stay in the page (if page is not found)
     }
 }
 
 const CoffeeStore = (props) => {
     const router = useRouter();
+
+    // Does route exist in getStaticPaths ? if No then show loading state
+    if (router.isFallback) {
+        return <div>Loading</div>
+
+    }
+
     return (
         <>
             <div>Coffee Store Page {router.query.id}</div>
