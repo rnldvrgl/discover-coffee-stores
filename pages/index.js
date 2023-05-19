@@ -13,7 +13,7 @@ export async function getStaticProps(context) {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'fsq3lDlIy3F0+VfjuHFvJwv9TJbfbvNXBixUVFalJsKTfCo='
+      Authorization: process.env.FOURSQUARE_API_KEY,
     }
   };
 
