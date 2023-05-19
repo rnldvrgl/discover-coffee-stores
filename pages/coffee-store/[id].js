@@ -4,6 +4,7 @@ import Head from "next/head";
 import styles from "./coffee-store.module.css"
 import { useRouter } from "next/router";
 import coffeeStoreData from "../../data/coffee-stores.json"
+import cls from "classnames"
 
 export function getStaticProps({ params }) {
     return {
@@ -42,6 +43,10 @@ const CoffeeStore = (props) => {
         return <div>Loading</div>
     }
 
+    const handleUpvoteButton = () => {
+        console.log("Upvote")
+    }
+
     return (
         <div className={styles.layout}>
             <Head>
@@ -56,9 +61,21 @@ const CoffeeStore = (props) => {
                 </div>
                 <Image src={imgUrl} width={600} height={360} className={styles.storeImg} alt={name}></Image>
             </div>
-            <div className={styles.col2}>
-                <p>{address}</p>
-                <p>{neighbourhood}</p>
+            <div className={cls("glass", styles.col2)}>
+                <div className={styles.iconWrapper}>
+                    <Image src="/static/icons/places.svg" width="24" height="24" alt="" />
+                    <p className={styles.text}>{address}</p>
+                </div>
+                <div className={styles.iconWrapper}>
+                    <Image src="/static/icons/nearMe.svg" width="24" height="24" alt="" />
+                    <p className={styles.text}>{neighbourhood}</p>
+                </div>
+                <div className={styles.iconWrapper}>
+                    <Image src="/static/icons/star.svg" width="24" height="24" alt="" />
+                    <p className={styles.text}>1</p>
+                </div>
+
+                <button className={styles.upvoteButton} onClick={handleUpvoteButton}>Up Vote!</button>
             </div>
         </div>
     )
