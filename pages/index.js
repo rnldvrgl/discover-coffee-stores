@@ -4,29 +4,16 @@ import Banner from "@/components/banner"
 import Card from "@/components/card"
 import Image from "next/image"
 import coffeeStoresData from "../data/coffee-stores.json"
+import { fetchCoffeeStores } from "@/lib/coffee-store"
 
 // Get Static Props
 export async function getStaticProps(context) {
 
-  // API from Four Square
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: process.env.FOURSQUARE_API_KEY,
-    }
-  };
-
-  // Add Await if the Response returns Promise
-  const response = await fetch('https://api.foursquare.com/v3/places/search?query=coffee%20stores&ll=15.24%2C120.59&limit=6', options);
-
-  const data = await response.json();
-
-  // .catch (err => console.error(err));
+  const coffeeStores = await fetchCoffeeStores();
 
   return {
     props: {
-      coffeeStores: data.results,
+      coffeeStores,
     }, //will be passed to the page component as props
   }
 }
