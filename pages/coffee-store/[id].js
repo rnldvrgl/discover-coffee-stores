@@ -3,45 +3,46 @@ import Image from "next/image";
 import Head from "next/head";
 import styles from "./coffee-store.module.css"
 import { useRouter } from "next/router";
-import coffeeStoreData from "../../data/coffee-stores.json"
 import cls from "classnames"
+import { fetchCoffeeStores } from "@/lib/coffee-store"
 
-export function getStaticProps({ params }) {
+export async function getStaticProps({ params }) {
+
+    const coffeeStores = await fetchCoffeeStores();
+    console.log(coffeeStores)
     return {
         props: {
-            coffeeStore: coffeeStoreData.find((coffeeStore) => {
-                return coffeeStore.id.toString() === params.id; //dynamic id
+            coffeeStore: coffeeStores.find((coffeeStore) => {
+                return coffeeStore.fsq_id.toString() === params.id; //dynamic id
             }),
         },
     };
 }
 
-export function getStaticPaths() {
-    const paths = coffeeStoreData.map(coffeeStore => {
+export async function getStaticPaths() {
+    const coffeeStores = await fetchCoffeeStores();
+    const paths = coffeeStores.map((coffeeStore) => {
         return {
             params: {
-                id: coffeeStore.id.toString(),
-            }
-        }
-    })
-
+                id: coffeeStore.fsq_id.toString(),
+            },
+        };
+    });
     return {
-        paths: [
-            { params: { id: '0' } },
-            { params: { id: '1' } },
-        ],
-        fallback: true, //false = to show an error 404 page, true = if we want to stay in the page (if page is not found)
-    }
+        paths,
+        fallback: true,
+    };
 }
 
 const CoffeeStore = (props) => {
     const router = useRouter();
-    const { address, name, neighbourhood, imgUrl } = props.coffeeStore;
 
     // Does route exist in getStaticPaths ? if No then show loading state
     if (router.isFallback) {
         return <div>Loading</div>
     }
+
+    const { address, name, neighbourhood, imgUrl } = props.coffeeStore;
 
     const handleUpvoteButton = () => {
         console.log("Upvote")
@@ -50,7 +51,7 @@ const CoffeeStore = (props) => {
     return (
         <div className={styles.layout}>
             <Head>
-                <title>{name}</title>
+                <title>s</title>
             </Head>
             <div className={styles.col1}>
                 <div className={styles.backToHomeLink}>
@@ -59,7 +60,7 @@ const CoffeeStore = (props) => {
                 <div className={styles.nameWrapper}>
                     <h1 className={styles.name}>{name}</h1>
                 </div>
-                <Image src={imgUrl} width={600} height={360} className={styles.storeImg} alt={name}></Image>
+                <Image src="https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80" width={600} height={360} className={styles.storeImg} alt="a"></Image>
             </div>
             <div className={cls("glass", styles.col2)}>
                 <div className={styles.iconWrapper}>
