@@ -7,6 +7,20 @@ import coffeeStoresData from "../data/coffee-stores.json"
 
 // Get Static Props
 export async function getStaticProps(context) {
+
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'fsq3lDlIy3F0+VfjuHFvJwv9TJbfbvNXBixUVFalJsKTfCo='
+    }
+  };
+
+  fetch('https://api.foursquare.com/v3/places/search?query=coffee%20stores&ll=15.24%2C120.59&limit=6', options)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
+
   return {
     props: {
       coffeeStores: coffeeStoresData,
