@@ -13,20 +13,20 @@
   padding-right: 1rem /* 16px */;
 }
 
-.heroImage{
+.heroImage {
   position: absolute;
   top: 0px;
   z-index: 1;
 }
 
-.cardLayout{
+.cardLayout {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  column-gap: 1.5rem;
-  row-gap: 1.5rem;
+  column-gap: 1.5rem /* 24px */;
+  row-gap: 1.5rem /* 24px */;
 }
 
-.card{
+.card {
   justify-content: center;
 }
 
@@ -57,9 +57,7 @@
     padding-left: 1.5rem /* 24px */;
     padding-right: 1.5rem /* 24px */;
   }
-
-  .cardLayout{
-    display: grid;
+  .cardLayout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -74,12 +72,11 @@
     margin-top: 4rem /* 64px */;
   }
 
-  .heroImage{
+  .heroImage {
     right: 20%;
   }
 
-  .cardLayout{
-    display: grid;
+  .cardLayout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -94,9 +91,10 @@
     padding-left: 2rem /* 32px */;
     padding-right: 2rem /* 32px */;
   }
-
-  .cardLayout{
-    display: grid;
+  .heroImage {
+    right: 20%;
+  }
+  .cardLayout {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -106,8 +104,7 @@
     margin-top: 7rem /* 112px */;
   }
 
-  .cardLayout{
-    display: grid;
+  .cardLayout {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
