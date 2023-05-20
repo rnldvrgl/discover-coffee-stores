@@ -60,7 +60,7 @@ const CoffeeStore = (props) => {
                 <div className={styles.nameWrapper}>
                     <h1 className={styles.name}>{name}</h1>
                 </div>
-                <Image src="https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80" width={600} height={360} className={styles.storeImg} alt="a"></Image>
+                <Image src={imgUrl || "https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80"} width={600} height={360} className={styles.storeImg} alt="a"></Image>
             </div>
             <div className={cls("glass", styles.col2)}>
                 <div className={styles.iconWrapper}>
