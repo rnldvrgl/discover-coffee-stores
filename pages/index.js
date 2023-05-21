@@ -3,7 +3,6 @@ import styles from "../styles/Home.module.css"
 import Banner from "@/components/banner"
 import Card from "@/components/card"
 import Image from "next/image"
-import coffeeStoresData from "../data/coffee-stores.json"
 import { fetchCoffeeStores } from "@/lib/coffee-store"
 
 // Get Static Props
@@ -24,6 +23,7 @@ export default function Home(props) {
   // Handle Button Function
   const handleOnBannerBtnClick = () => {
     console.log("hi");
+    // handleTrackLocation();
   }
 
   return (
