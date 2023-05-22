@@ -5,6 +5,7 @@ import Card from "@/components/card"
 import Image from "next/image"
 import { fetchCoffeeStores } from "@/lib/coffee-store"
 import useTrackLocation from "@/hooks/use-track-location"
+import { useEffect } from "react"
 
 // Get Static Props
 export async function getStaticProps(context) {
@@ -23,7 +24,24 @@ export default function Home(props) {
 
   const { handleTrackLocation, latLong, locationErrorMsg, isFindingLocation } = useTrackLocation();
 
-  console.log({ latLong, locationErrorMsg })
+  console.log({ latLong, locationErrorMsg });
+
+  useEffect(() => {
+    async function setCoffeeStoresByLocation() {
+      if (latLong) {
+        try {
+          const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 30);
+          console.log({ fetchedCoffeeStores });
+          //set coffee stores
+        } catch (error) {
+          //set error
+          console.log("Error", { error });
+        }
+      }
+    }
+    setCoffeeStoresByLocation();
+  }, [latLong]);
+
 
   // Handle Button Function
   const handleOnBannerBtnClick = () => {
@@ -47,7 +65,7 @@ export default function Home(props) {
         </div>
         {props.coffeeStores.length > 0 && (
           <div className={styles.sectionWrapper}>
-            <h2 className={styles.heading2}>Toronto Stores</h2>
+            <h2 className={styles.heading2}>Mabalacat Stores</h2>
             <div className={styles.cardLayout}>
               {props.coffeeStores.map(coffeeStore => {
                 return (
