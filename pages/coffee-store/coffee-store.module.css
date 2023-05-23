@@ -87,7 +87,7 @@
   padding-top: 0.5rem /* 8px */;
   padding-bottom: 0.5rem /* 8px */;
 
-  background-color: var(--text-purple-dark);
+  background-color: var(--text-blue-dark);
   cursor: pointer;
   color: white;
   outline: 0;
@@ -97,7 +97,7 @@
 }
 
 .upvoteButton:hover {
-  background-color: var(--text-purple);
+  background-color: var(--text-blue);
 }
 
 @media (min-width: 1024px) {

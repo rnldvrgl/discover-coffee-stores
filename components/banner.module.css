@@ -9,7 +9,6 @@
   letter-spacing: -0.025em;
   font-weight: 800;
   color: var(--text-black);
-
   font-size: 3rem /* 48px */;
   line-height: 1;
 }
@@ -20,7 +19,7 @@
 
 .title2 {
   display: block;
-  color: var(--text-purple);
+  color: var(--text-blue);
 }
 
 .subTitle {
@@ -36,7 +35,7 @@
 }
 
 .button {
-  background-color: var(--text-purple-dark);
+  background-color: var(--text-blue-dark);
   cursor: pointer;
   color: white;
   outline: 0;
@@ -50,7 +49,7 @@
 }
 
 .button:hover {
-  background-color: var(--text-purple-dark);
+  background-color: var(--text-blue-dark);
 }
 
 /** 

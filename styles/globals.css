@@ -4,11 +4,8 @@ body {
   margin: 0;
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background: url("/static/background.png");
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #373b64;
+  color: #323232;
+  background: rgba(136, 136, 136, 0.5);
   height: 100vh;
 }
 
@@ -83,8 +80,8 @@ button:focus {
 }
 
 :root {
-  --text-purple: rgba(67, 56, 202, 1);
-  --text-purple-dark: rgba(79, 70, 229, 1);
-  --text-black: rgba(17, 24, 39, 1);
-  --text-white-100: rgba(229, 231, 235, 1);
+  --text-blue: rgb(46, 44, 177);
+  --text-blue-dark: rgb(17, 17, 124);
+  --text-black: #323232;
+  --text-white-100: rgb(24, 58, 126);
 }
