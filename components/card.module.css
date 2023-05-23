@@ -4,19 +4,13 @@
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
   box-shadow: 0 0 transparent, 0 0 #0000, 0 0 transparent, 0 0 #0000,
     0 0 transparent;
-
   border-color: var(--text-white-100);
   border-radius: 0.75rem /* 12px */;
 }
 
 .container {
   border-radius: 0.75rem /* 12px */;
-  padding-top: 0.25rem /* 4px */;
-  padding-bottom: 0.25rem /* 4px */;
-  padding-bottom: 1.25rem /* 20px */;
-  padding-left: 1rem /* 16px */;
-  padding-right: 1rem /* 16px */;
-
+  padding: 0.75rem 1rem ;
   backdrop-filter: blur(10px);
 }
 
@@ -33,6 +27,7 @@
   font-weight: 800;
   overflow: hidden;
   width: 16rem /* 256px */;
+  margin-bottom: 0.75rem;
 }
 
 .cardImageWrapper {

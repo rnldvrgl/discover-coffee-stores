@@ -1,22 +1,27 @@
 /** Mobile first development **/
 
 .container {
-  margin-bottom: 14rem /* 224px */;
+  margin-bottom: auto /* 224px */;
 }
 
 .main {
   margin-top: 2.5rem /* 40px */;
   margin-left: auto;
   margin-right: auto;
-  max-width: 72rem /* 1152px */;
+  max-width: 90rem /* 1,440px */;
   padding-left: 1rem /* 16px */;
   padding-right: 1rem /* 16px */;
 }
 
+.hero{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .heroImage {
-  position: absolute;
-  top: 0px;
-  z-index: 1;
+  height: auto;
+  width: auto;
 }
 
 .cardLayout {
@@ -35,11 +40,11 @@
   line-height: 2.5rem;
   padding-bottom: 2rem;
   margin-top: 2rem;
-  color: var(--text-white-100);
+  color: var(--text-brown);
 }
 
 .sectionWrapper{
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 /** Breakpoints:
@@ -58,6 +63,7 @@
 
   .main {
     margin-top: 3rem /* 48px */;
+    margin-bottom: 3rem /* 48px */;
     padding-left: 1.5rem /* 24px */;
     padding-right: 1.5rem /* 24px */;
   }
@@ -74,14 +80,11 @@
 
   .main {
     margin-top: 4rem /* 64px */;
-  }
-
-  .heroImage {
-    right: 20%;
+    margin-bottom: 4rem /* 64px */;
   }
 
   .cardLayout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -92,23 +95,23 @@
   }
   .main {
     margin-top: 5rem /* 80px */;
+    margin-bottom: 5rem /* 64px */;
     padding-left: 2rem /* 32px */;
     padding-right: 2rem /* 32px */;
   }
-  .heroImage {
-    right: 20%;
-  }
+
   .cardLayout {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1280px) {
   .main {
     margin-top: 7rem /* 112px */;
+    margin-bottom: 7rem /* 64px */;
   }
 
   .cardLayout {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

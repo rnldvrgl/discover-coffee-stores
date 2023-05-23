@@ -57,28 +57,30 @@ const CoffeeStore = (props) => {
             <Head>
                 <title>{name}</title>
             </Head>
-            <div className={styles.col1}>
-                <div className={styles.backToHomeLink}>
-                    <Link href="/">← Back to Home</Link>
+            <div className={styles.container}>
+                <div className={styles.col1}>
+                    <div className={styles.backToHomeLink}>
+                        <Link href="/">← Back to Home</Link>
+                    </div>
+                    <div className={styles.nameWrapper}>
+                        <h1 className={styles.name}>{name}</h1>
+                    </div>
+                    <Image src={imgUrl || "https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80"} width={600} height={360} className={styles.storeImg} alt="Store Image"></Image>
                 </div>
-                <div className={styles.nameWrapper}>
-                    <h1 className={styles.name}>{name}</h1>
-                </div>
-                <Image src={imgUrl || "https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80"} width={600} height={360} className={styles.storeImg} alt="a"></Image>
-            </div>
-            <div className={cls("glass", styles.col2)}>
-                <div className={styles.iconWrapper}>
-                    <Image src="/static/icons/places.svg" width="24" height="24" alt="" />
-                    <p className={styles.text}>{address}</p>
-                </div>
-                <div className={styles.iconWrapper}>
-                    <Image src="/static/icons/star.svg" width="24" height="24" alt="" />
-                    <p className={styles.text}>1</p>
-                </div>
+                <div className={cls("glass", styles.col2)}>
+                    <div className={styles.iconWrapper}>
+                        <Image src="/static/icons/places.svg" width="24" height="24" alt="" />
+                        <p className={styles.text}>{address}</p>
+                    </div>
+                    <div className={styles.iconWrapper}>
+                        <Image src="/static/icons/star.svg" width="24" height="24" alt="" />
+                        <p className={styles.text}>1</p>
+                    </div>
 
-                <button className={styles.upvoteButton} onClick={handleUpvoteButton}>Up Vote!</button>
+                    <button className={styles.upvoteButton} onClick={handleUpvoteButton}>Up Vote!</button>
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 
