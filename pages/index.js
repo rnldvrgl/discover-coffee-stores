@@ -57,7 +57,7 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Coffee Connoisseur</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -76,12 +76,21 @@ export default function Home(props) {
         {/* Stores Near Me */}
         {coffeeStores.length > 0 && (
           <div className={styles.sectionWrapper}>
-            <h2 className={styles.heading2}>Stores Near Me:</h2>
+            <h2 className={styles.heading2}>Stores near me</h2>
             <div className={styles.cardLayout}>
-              {coffeeStores.map(coffeeStore => {
+              {coffeeStores.map((coffeeStore) => {
                 return (
-                  <Card key={coffeeStore.id} name={coffeeStore.name} imgUrl={coffeeStore.imgUrl || 'https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80'} href={`/coffee-store/${coffeeStore.id}`} className={styles.card} />
-                )
+                  <Card
+                    key={coffeeStore.id}
+                    name={coffeeStore.name}
+                    imgUrl={
+                      coffeeStore.imgUrl ||
+                      "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
+                    }
+                    href={`/coffee-store/${coffeeStore.id}`}
+                    className={styles.card}
+                  />
+                );
               })}
             </div>
           </div>
@@ -89,19 +98,30 @@ export default function Home(props) {
 
 
         {/* Coffee Stores in Mabalacat */}
-        {props.coffeeStores.length > 0 && (
-          <div className={styles.sectionWrapper}>
-            <h2 className={styles.heading2}>Mabalacat Stores</h2>
-            <div className={styles.cardLayout}>
-              {props.coffeeStores.map(coffeeStore => {
-                return (
-                  <Card key={coffeeStore.id} name={coffeeStore.name} imgUrl={coffeeStore.imgUrl || 'https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80'} href={`/coffee-store/${coffeeStore.id}`} className={styles.card} />
-                )
-              })}
-            </div>
-          </div>
-        )}
-      </main >
+        <div className={styles.sectionWrapper}>
+          {props.coffeeStores.length > 0 && (
+            <>
+              <h2 className={styles.heading2}>Mabalacat stores</h2>
+              <div className={styles.cardLayout}>
+                {props.coffeeStores.map((coffeeStore) => {
+                  return (
+                    <Card
+                      key={coffeeStore.id}
+                      name={coffeeStore.name}
+                      imgUrl={
+                        coffeeStore.imgUrl ||
+                        "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
+                      }
+                      href={`/coffee-store/${coffeeStore.id}`}
+                      className={styles.card}
+                    />
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </div>
+      </main>
 
     </div >
   )
