@@ -8,6 +8,8 @@ import { fetchCoffeeStores } from "@/lib/coffee-store"
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../_app";
 
+import { isEmpty } from "@/utils";
+
 export async function getStaticProps(staticProps) {
     const params = staticProps.params;
     console.log("params", params);
