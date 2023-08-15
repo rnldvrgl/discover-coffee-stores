@@ -6,8 +6,6 @@ const getCoffeeStoresByLocation = async (req, res) => {
 
         const response = await fetchCoffeeStores(latLong, limit);
 
-        console.log(response)
-
         res.status(200);
         res.json(response);
 
@@ -15,6 +13,8 @@ const getCoffeeStoresByLocation = async (req, res) => {
         console.error("There is an error", error);
         res.status(500);
     }
+
+    return res;
 }
 
 export default getCoffeeStoresByLocation;
