@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { ACTION_TYPES, StoreContext } from "./_app";
+import { ACTION_TYPES, StoreContext } from "@/context/storeContext";
 import Banner from "../components/banner";
 import Card from "../components/card";
 
@@ -12,8 +12,6 @@ import { fetchCoffeeStores } from "@/lib/coffee-store";
 import useTrackLocation from "../hooks/use-track-location";
 
 export async function getStaticProps(context) {
-  console.log("hi getStaticProps");
-
   const coffeeStores = await fetchCoffeeStores();
 
   return {
