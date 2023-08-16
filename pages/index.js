@@ -22,7 +22,6 @@ export async function getStaticProps(context) {
 }
 
 export default function Home(props) {
-  console.log("props", props);
 
   const { handleTrackLocation, locationErrorMsg, isFindingLocation } =
     useTrackLocation();
@@ -34,19 +33,23 @@ export default function Home(props) {
 
   const { coffeeStores, latLong } = state;
 
-  console.log({ latLong, locationErrorMsg });
+  // console.log({ latLong, locationErrorMsg });
 
   useEffect(() => {
     async function setCoffeeStoresByLocation() {
       if (latLong) {
         try {
-          const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 30);
-          console.log({ fetchedCoffeeStores });
+          const response = await fetch(`api/getCoffeeStoresByLocation?latlong=${latLong}&limit=30`);
+
+          const coffeeStores = await response.json();
+
+          console.log(coffeeStores)
+
           // setCoffeeStores(fetchedCoffeeStores);
           dispatch({
             type: ACTION_TYPES.SET_COFFEE_STORES,
             payload: {
-              coffeeStores: fetchedCoffeeStores,
+              coffeeStores,
             },
           });
           //set coffee stores
