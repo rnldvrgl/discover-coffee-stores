@@ -14,7 +14,13 @@ const createCoffeeStore = async (req, res) => {
         }).firstPage();
 
         if (findCoffeeStoreRecords.length !== 0) {
-            res.json(findCoffeeStoreRecords);
+            const records = findCoffeeStoreRecords.map((record) => {
+                return {
+                    ...record.fields,
+                }
+            })
+
+            res.json(records);
         } else {
             res.json({ message: "No coffee store found." });
         }
