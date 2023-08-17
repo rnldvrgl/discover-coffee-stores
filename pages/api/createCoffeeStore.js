@@ -6,12 +6,18 @@ const table = base('coffee-stores');
 
 console.log(table)
 
-const createCoffeeStore = (req, res) => {
+const createCoffeeStore = async (req, res) => {
 
     if (req.method == 'POST') {
-        res.json({ message: "POST" });
-    } else if (req.method == 'GET') {
-        res.json({ message: "GET" });
+        const findCoffeeStoreRecords = await table.select({
+            filterByFormula: `id=${req.query.id}`
+        }).firstPage();
+
+        if (findCoffeeStoreRecords.length !== 0) {
+            res.json(findCoffeeStoreRecords);
+        } else {
+            res.json({ message: "No coffee store found." });
+        }
     }
 }
 
