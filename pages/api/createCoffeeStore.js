@@ -1,4 +1,4 @@
-import airtable from "@/lib/airtable";
+import { table, getMinifiedRecords } from "@/lib/airtable";
 
 const createCoffeeStore = async (req, res) => {
 
@@ -15,11 +15,7 @@ const createCoffeeStore = async (req, res) => {
                     .firstPage();
 
                 if (findCoffeeStoreRecords.length !== 0) {
-                    const records = findCoffeeStoreRecords.map((record) => {
-                        return {
-                            ...record.fields,
-                        };
-                    });
+                    const records = getMinifiedRecords(findCoffeeStoreRecords);
                     res.json(records);
                 } else {
                     if (id && name) {
@@ -36,11 +32,8 @@ const createCoffeeStore = async (req, res) => {
                             },
                         ]);
 
-                        const records = createRecords.map((record) => {
-                            return {
-                                ...record.fields,
-                            };
-                        });
+                        const records = getMinifiedRecords(createRecords);
+
                         res.json(records);
                     } else {
                         res.status(400);
