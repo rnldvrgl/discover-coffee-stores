@@ -1,36 +1,72 @@
-const Airtable = require('airtable');
-const base = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN }).base(process.env.AIRTABLE_BASE_KEY);
+const Airtable = require("airtable");
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_TOKEN }).base(
+    process.env.AIRTABLE_BASE_KEY
+);
 
+const table = base("coffee-stores");
 
-const table = base('coffee-stores');
-
-console.log(table)
+console.log({ table });
 
 const createCoffeeStore = async (req, res) => {
+    console.log({ req });
 
-    if (req.method == 'POST') {
+    if (req.method === "POST") {
+
+        const { id, name, neighbourhood, address, imgUrl, voting } = req.body;
+
         try {
-            const findCoffeeStoreRecords = await table.select({
-                filterByFormula: `id=${req.query.id}`
-            }).firstPage();
+            if (id) {
+                const findCoffeeStoreRecords = await table
+                    .select({
+                        filterByFormula: `id=21`,
+                    })
+                    .firstPage();
 
-            if (findCoffeeStoreRecords.length !== 0) {
-                const records = findCoffeeStoreRecords.map((record) => {
-                    return {
-                        ...record.fields,
+                console.log({ findCoffeeStoreRecords });
+
+                if (findCoffeeStoreRecords.length !== 0) {
+                    const records = findCoffeeStoreRecords.map((record) => {
+                        return {
+                            ...record.fields,
+                        };
+                    });
+                    res.json(records);
+                } else {
+                    if (id && name) {
+                        const createRecords = await table.create([
+                            {
+                                fields: {
+                                    id,
+                                    name,
+                                    address,
+                                    neighbourhood,
+                                    voting,
+                                    imgUrl,
+                                },
+                            },
+                        ]);
+
+                        const records = createRecords.map((record) => {
+                            return {
+                                ...record.fields,
+                            };
+                        });
+                        res.json(records);
+                    } else {
+                        res.status(400);
+                        res.json({ message: "Missing fields" });
                     }
-                })
-
-                res.json(records);
+                }
             } else {
-                res.json({ message: "No coffee store found." });
+                res.status(400);
+                res.json({ message: "Id is missing" });
             }
-        } catch (error) {
-            console.error("There is an error", error);
+        } catch (err) {
+            console.error("Error creating or finding store", err);
             res.status(500);
-            res.json({ message: "Something went wrong.", error })
+            res.json({ message: "Error creating or finding store", err });
         }
     }
-}
+};
 
 export default createCoffeeStore;
