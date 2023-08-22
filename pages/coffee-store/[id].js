@@ -55,7 +55,16 @@ const CoffeeStore = (initialProps) => {
 
     const handleCreateCoffeeStore = async () => {
         try {
-            const response = await fetch("/api/createCoffeeStore");
+            const data = {
+                id, name, voting, address, neighbourhood, imgUrl
+            }
+            const response = await fetch("/api/createCoffeeStore", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
         } catch (error) {
             console.error("Error creating or finding store", err);
         }
