@@ -1,8 +1,8 @@
-import { table, getMinifiedRecords } from "@/lib/airtable";
+import { table, getMinifiedRecords } from "../../lib/airtable";
 
 const createCoffeeStore = async (req, res) => {
-
     if (req.method === "POST") {
+        //find a record
 
         const { id, name, neighbourhood, address, imgUrl, voting } = req.body;
 
@@ -10,7 +10,7 @@ const createCoffeeStore = async (req, res) => {
             if (id) {
                 const findCoffeeStoreRecords = await table
                     .select({
-                        filterByFormula: `id=${id}`,
+                        filterByFormula: `id="${id}"`,
                     })
                     .firstPage();
 
@@ -18,7 +18,8 @@ const createCoffeeStore = async (req, res) => {
                     const records = getMinifiedRecords(findCoffeeStoreRecords);
                     res.json(records);
                 } else {
-                    if (id && name) {
+                    //create a record
+                    if (name) {
                         const createRecords = await table.create([
                             {
                                 fields: {
@@ -33,11 +34,10 @@ const createCoffeeStore = async (req, res) => {
                         ]);
 
                         const records = getMinifiedRecords(createRecords);
-
                         res.json(records);
                     } else {
                         res.status(400);
-                        res.json({ message: "Missing fields" });
+                        res.json({ message: "Id or name is missing" });
                     }
                 }
             } else {
@@ -45,9 +45,9 @@ const createCoffeeStore = async (req, res) => {
                 res.json({ message: "Id is missing" });
             }
         } catch (err) {
-            console.error("Error creating or finding store", err);
+            console.error("Error creating or finding a store", err);
             res.status(500);
-            res.json({ message: "Error creating or finding store", err });
+            res.json({ message: "Error creating or finding a store", err });
         }
     }
 };

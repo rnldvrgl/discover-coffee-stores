@@ -55,23 +55,30 @@ const CoffeeStore = (initialProps) => {
 
     const handleCreateCoffeeStore = async (coffeeStore) => {
         try {
+            const { id, name, voting, imgUrl, neighbourhood, address } = coffeeStore;
             const response = await fetch("/api/createCoffeeStore", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    id: `${id}`, name, voting, address: address || "", neighbourhood: neighbourhood || "", imgUrl
+                    id,
+                    name,
+                    voting: 0,
+                    imgUrl,
+                    neighbourhood: neighbourhood || "",
+                    address: address || "",
                 }),
             });
 
             const dbCoffeeStore = await response.json();
-
-            console.log(dbCoffeeStore)
-        } catch (error) {
-            console.error("Error creating or finding store", err);
+            console.log({ dbCoffeeStore });
+        } catch (err) {
+            console.error("Error creating coffee store", err);
         }
     };
+
+
 
     useEffect(() => {
         if (isEmpty(initialProps.coffeeStore)) {
@@ -121,18 +128,18 @@ const CoffeeStore = (initialProps) => {
                 <div className={cls("glass", styles.col2)}>
                     {address && (
                         <div className={styles.iconWrapper}>
-                            <Image src="/static/icons/places.svg" width="24" height="24" />
+                            <Image src="/static/icons/places.svg" width="24" height="24" alt="Image" />
                             <p className={styles.text}>{address}</p>
                         </div>
                     )}
                     {neighbourhood && (
                         <div className={styles.iconWrapper}>
-                            <Image src="/static/icons/nearMe.svg" width="24" height="24" />
+                            <Image src="/static/icons/nearMe.svg" width="24" height="24" alt="Neighbourhood" />
                             <p className={styles.text}>{neighbourhood}</p>
                         </div>
                     )}
                     <div className={styles.iconWrapper}>
-                        <Image src="/static/icons/star.svg" width="24" height="24" />
+                        <Image src="/static/icons/star.svg" width="24" height="24" alt="Image" />
                         <p className={styles.text}>1</p>
                     </div>
 

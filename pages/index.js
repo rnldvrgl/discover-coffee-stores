@@ -43,7 +43,7 @@ export default function Home(props) {
 
           const coffeeStores = await response.json();
 
-          console.log(coffeeStores)
+          // console.log(coffeeStores)
 
           // setCoffeeStores(fetchedCoffeeStores);
           dispatch({
@@ -84,7 +84,7 @@ export default function Home(props) {
           {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
           {coffeeStoresError && <p>Something went wrong: {coffeeStoresError}</p>}
           <div className={styles.heroImage}>
-            <Image src="/static/panda.png" width={400} height={400} />
+            <Image src="/static/panda.png" alt="Panda" width={400} height={400} />
           </div>
         </div>
 
