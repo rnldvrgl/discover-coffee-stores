@@ -1,21 +1,29 @@
+import { findRecordByFilter } from "@/lib/airtable";
+
 const upvoteCoffeeStoreById = async (req, res) => {
-    const { id } = req.query;
+    if (req.method === "PUT") {
+        try {
+            const { id } = req.body;
 
-    //     try {
-    //         const { latLong, limit } = req.query;
+            if (id) {
+                const records = await findRecordByFilter(id);
 
-    //         const response = await fetchCoffeeStores(latLong, limit);
+                if (records.length !== 0) {
+                    res.json(records);
+                } else {
+                    res.json({ message: "Coffee Store doesn't exist", id })
+                }
+            } else {
+                res.status(400);
+                res.json({ message: "Id is missing" })
+            }
 
-    //         res.status(200);
-    //         res.json(response);
-
-    //     } catch(error) {
-    //         console.error("There is an error", error);
-    //         res.status(500);
-    //         res.json({ message: "Something went wrong.", error })
-    //     }
-
-    // return res;
+        } catch (error) {
+            res.status(500);
+            res.json({ message: "Something went wrong.", error })
+        }
+    }
 }
+
 
 export default upvoteCoffeeStoreById;
