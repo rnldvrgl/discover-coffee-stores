@@ -1,14 +1,22 @@
-import { fetchCoffeeStores } from "@/lib/coffee-store";
+import { table, getMinifiedRecords } from "@/lib/airtable";
 
-const getCoffeeStoresById = async (req, res) => {
+const getCoffeeStoreById = async (req, res) => {
     const { id } = req.query;
 
     try {
         if (id) {
-            const response = await fetchCoffeeStores(latLong, limit);
+            const findCoffeeStoreRecords = await table
+                .select({
+                    filterByFormula: `id="${id}"`,
+                })
+                .firstPage();
 
-            res.status(200);
-            res.json({ message: `ID is created ${id}` });
+            if (findCoffeeStoreRecords.length !== 0) {
+                const records = getMinifiedRecords(findCoffeeStoreRecords);
+                res.json(records);
+            } else {
+                res.json({ message: 'id could not be found' })
+            }
         } else {
             res.status(400);
             res.json({ message: `ID is missing` })
@@ -23,6 +31,4 @@ const getCoffeeStoresById = async (req, res) => {
     return res;
 }
 
-export default getCoffeeStoresById;
-
-// http://localhost:3000/api/getCoffeeStoresByLocation?latLong=34,45&limit=30
+export default getCoffeeStoreById;
