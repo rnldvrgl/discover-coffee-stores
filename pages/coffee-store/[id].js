@@ -7,12 +7,12 @@ import cls from "classnames"
 import { fetchCoffeeStores } from "@/lib/coffee-store"
 import { useContext, useEffect, useState } from "react";
 import { StoreContext } from "@/context/storeContext";
+import useSWR from "swr";
 
-import { isEmpty } from "@/utils";
+import { fetcher, isEmpty } from "@/utils";
 
 export async function getStaticProps(staticProps) {
     const params = staticProps.params;
-    console.log("params", params);
 
     const coffeeStores = await fetchCoffeeStores();
     const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
@@ -72,7 +72,6 @@ const CoffeeStore = (initialProps) => {
             });
 
             const dbCoffeeStore = await response.json();
-            console.log({ dbCoffeeStore });
         } catch (err) {
             console.error("Error creating coffee store", err);
         }
@@ -99,12 +98,26 @@ const CoffeeStore = (initialProps) => {
 
     const { name, address, neighbourhood, imgUrl } = coffeeStore;
 
-
     const [votingCount, setVotingCount] = useState(0);
+
+    const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher);
+
+    useEffect(() => {
+        if (data && data.length > 0) {
+            console.log("Data from SWR:", data)
+            setCoffeeStore(data[0]);
+            setVotingCount(data[0].voting);
+        }
+
+    }, [data]);
 
     const handleUpvoteButton = () => {
         let count = votingCount + 1;
         setVotingCount(count);
+    };
+
+    if (error) {
+        return <div>Something went wrong retrieving coffee store page</div>
     };
 
     return (
