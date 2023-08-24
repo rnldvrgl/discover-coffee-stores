@@ -90,9 +90,12 @@ const CoffeeStore = (initialProps) => {
                     setCoffeeStore(coffeeStoreFromContext);
                     handleCreateCoffeeStore(coffeeStoreFromContext);
                 }
+                else {
+                    handleCreateCoffeeStore(initialProps.coffeeStore);
+                }
             }
         }
-    }, [id]);
+    }, [id, initialProps, initialProps.coffeeStore]);
 
     const { name, address, neighbourhood, imgUrl } = coffeeStore;
 
