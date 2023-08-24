@@ -1,6 +1,8 @@
 import { fetchCoffeeStores } from "@/lib/coffee-store";
 
 const getCoffeeStoresByLocation = async (req, res) => {
+    const { id } = req.query;
+
     try {
         const { latLong, limit } = req.query;
 
