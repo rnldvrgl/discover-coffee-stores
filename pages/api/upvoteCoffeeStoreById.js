@@ -17,7 +17,7 @@ const upvoteCoffeeStoreById = async (req, res) => {
                     console.log(calculateVoting)
 
                     const updateRecord = await table.update([{
-                        id: record.id,
+                        id: record.recordId,
                         fields: {
                             voting: calculateVoting,
                         }
