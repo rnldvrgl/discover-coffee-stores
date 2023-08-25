@@ -33,8 +33,6 @@ export default function Home(props) {
 
   const { coffeeStores, latLong } = state;
 
-  // console.log({ latLong, locationErrorMsg });
-
   useEffect(() => {
     async function setCoffeeStoresByLocation() {
       if (latLong) {
@@ -42,8 +40,6 @@ export default function Home(props) {
           const response = await fetch(`api/getCoffeeStoresByLocation?latlong=${latLong}&limit=30`);
 
           const coffeeStores = await response.json();
-
-          // console.log(coffeeStores)
 
           // setCoffeeStores(fetchedCoffeeStores);
           dispatch({
