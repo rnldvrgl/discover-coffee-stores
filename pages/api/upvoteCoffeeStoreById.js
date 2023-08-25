@@ -1,4 +1,4 @@
-import { findRecordByFilter, table } from "@/lib/airtable";
+import { findRecordByFilter, getMinifiedRecords, table } from "@/lib/airtable";
 
 const upvoteCoffeeStoreById = async (req, res) => {
     if (req.method === "PUT") {
@@ -23,7 +23,8 @@ const upvoteCoffeeStoreById = async (req, res) => {
                         }
                     }]);
                     if (updateRecord) {
-                        res.json({ updateRecord })
+                        const minifiedRecords = getMinifiedRecords(updateRecord);
+                        res.json({ minifiedRecords })
                     }
 
                 } else {
