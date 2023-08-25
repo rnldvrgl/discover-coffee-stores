@@ -14,8 +14,6 @@ const upvoteCoffeeStoreById = async (req, res) => {
 
                     const calculateVoting = parseInt(record.voting) + parseInt(1);
 
-                    console.log(calculateVoting)
-
                     const updateRecord = await table.update([{
                         id: record.recordId,
                         fields: {
