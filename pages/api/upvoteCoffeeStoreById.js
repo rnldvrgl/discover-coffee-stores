@@ -26,7 +26,6 @@ const upvoteCoffeeStoreById = async (req, res) => {
                         const minifiedRecords = getMinifiedRecords(updateRecord);
                         res.json({ minifiedRecords })
                     }
-
                 } else {
                     res.json({ message: "Coffee Store doesn't exist", id })
                 }
